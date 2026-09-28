@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Two Laptop Options — Naga City</title>
+<style>
+:root{
+  --bg-deep:#0b0718; --bg-mid:#150f2b; --card:#1e1740; --card-alt:#241c4a;
+  --text:#f1ecfb; --muted:#a99bcf; --violet:#8b5cf6; --violet-soft:#c4b5fd;
+  --gold:#facc15; --green:#4ade80; --red:#f87171; --border:rgba(255,255,255,.08);
+  --accent:var(--violet); --accent2:var(--gold);
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;} html{scroll-behavior:smooth;}
+body{background:radial-gradient(circle at 12% -10%,rgba(139,92,246,.25),transparent 40%),radial-gradient(circle at 88% 0%,rgba(250,204,21,.12),transparent 35%),var(--bg-deep);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5;}
+img{max-width:100%;}
+a{color:inherit;}
+
+/* Header + tab nav */
+.top{padding:36px 20px 16px;text-align:center;}
+.top h1{font-size:1.5rem;margin:8px 0 0;}
+.top p{color:var(--muted);margin:6px auto 0;max-width:52ch;}
+.badge{display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#0b0718;padding:6px 14px;border-radius:999px;font-size:.75rem;font-weight:700;}
+.tabs{position:sticky;top:0;z-index:20;background:rgba(11,7,24,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:12px 16px;}
+.tabs-inner{max-width:780px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;}
+.tab{background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:14px;padding:10px 14px;text-align:left;cursor:pointer;font:inherit;transition:transform .15s,border-color .2s,background .2s;}
+.tab small{display:block;color:var(--muted);font-size:.78rem;}
+.tab strong{display:block;font-size:.95rem;}
+.tab:hover{border-color:var(--violet);}
+.tab:active{transform:scale(.98);}
+.tab.active{background:linear-gradient(135deg,rgba(139,92,246,.35),rgba(250,204,21,.18));border-color:var(--violet);}
+.tab.active small{color:var(--text);}
+.tab-panel{display:none;} .tab-panel.active{display:block;animation:fade .35s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+/* Sections */
+.section{padding:56px 20px;} .section.alt{background:var(--bg-mid);}
+.section-inner{max-width:780px;margin:0 auto;}
+.section h2{font-size:1.6rem;margin:0 0 8px;}
+.lede{color:var(--muted);max-width:58ch;margin:0 0 28px;}
+.grid-2{display:grid;grid-template-columns:1fr;gap:20px;}
+@media(min-width:680px){.grid-2{grid-template-columns:1fr 1fr;}}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;}
+.panel h3{margin:0 0 4px;font-size:1.1rem;}
+.tag{display:inline-block;font-size:.75rem;font-weight:700;padding:3px 10px;border-radius:999px;margin-bottom:10px;}
+.tag.risk{background:rgba(248,113,113,.15);color:var(--red);}
+.tag.deal{background:rgba(74,222,128,.15);color:var(--green);}
+.price{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:700;}
+.price.old{color:var(--muted);text-decoration:line-through;font-size:1.3rem;}
+.price.new{color:var(--gold);font-size:2rem;}
+.savings-banner{margin-top:20px;text-align:center;background:linear-gradient(90deg,rgba(139,92,246,.15),rgba(250,204,21,.15));border:1px solid var(--border);border-radius:16px;padding:24px;}
+.savings-banner .amount{font-family:ui-monospace,monospace;font-size:2rem;color:var(--green);font-weight:700;}
+.savings-banner p{margin:8px 0 0;color:var(--muted);}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+.chip{font-family:ui-monospace,monospace;font-size:.85rem;padding:6px 12px;border-radius:10px;background:var(--card-alt);border:1px solid var(--border);color:var(--violet-soft);}
+.gallery{display:grid;grid-template-columns:1fr;gap:16px;margin-top:24px;}
+@media(min-width:680px){.gallery.three{grid-template-columns:repeat(3,1fr);} .gallery.two{grid-template-columns:1fr 1fr;}}
+.proof-label{font-size:.85rem;color:var(--muted);margin:0 0 8px;}
+.img-slot{display:block;position:relative;width:100%;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:var(--card-alt);border:1px solid var(--border);}
+.img-slot img{width:100%;height:100%;object-fit:cover;display:block;}
+.img-slot.shot img{object-fit:contain;}
+.checklist{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:10px;font-size:.95rem;}
+.checklist li{display:flex;gap:10px;align-items:flex-start;}
+.checklist li.bad::before{content:"✕";color:var(--red);font-weight:700;}
+.checklist li.good::before{content:"✓";color:var(--green);font-weight:700;}
+.steps{list-style:none;counter-reset:step;margin:20px 0 0;padding:0;display:flex;flex-direction:column;gap:16px;}
+.steps li{counter-increment:step;display:flex;gap:14px;align-items:flex-start;}
+.steps li::before{content:counter(step);flex:none;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#0b0718;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.85rem;}
+.proximity{font-family:ui-monospace,monospace;color:var(--gold);}
+.map-wrap{border-radius:16px;overflow:hidden;border:1px solid var(--border);}
+.map-wrap iframe{width:100%;height:320px;border:0;display:block;}
+.map-caption{color:var(--muted);font-size:.85rem;margin-top:12px;}
+.pledge{background:linear-gradient(160deg,var(--card),var(--card-alt));border:1px solid var(--border);border-radius:20px;padding:36px 28px;text-align:center;}
+.pledge .mark{font-size:2rem;}
+.pledge p{color:var(--muted);line-height:1.7;max-width:56ch;margin:14px auto 0;}
+.pledge .sign{display:block;margin-top:24px;font-family:ui-monospace,monospace;color:var(--violet-soft);}
+
+/* Comparison table */
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:16px;}
+table{width:100%;border-collapse:collapse;min-width:520px;background:var(--card);}
+th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--border);font-size:.92rem;vertical-align:top;}
+th{background:var(--card-alt);font-size:.85rem;}
+tr:last-child td{border-bottom:0;}
+td:first-child{color:var(--muted);white-space:nowrap;}
+td.win{color:var(--green);font-weight:700;}
+.btn{border:none;cursor:pointer;padding:14px 28px;border-radius:999px;font-size:1rem;font-weight:700;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#0b0718;box-shadow:0 10px 24px rgba(139,92,246,.35);transition:transform .15s;font-family:inherit;}
+.btn:active{transform:scale(.96);} .btn:disabled{opacity:.5;cursor:default;}
+.link-btn{margin-top:20px;background:none;border:1px solid var(--border);color:var(--violet-soft);padding:10px 18px;border-radius:999px;cursor:pointer;font:inherit;}
+.link-btn:hover{border-color:var(--violet);}
+
+/* Reason countdown */
+.app{width:100%;max-width:420px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:18px;}
+.progress{width:100%;height:8px;background:rgba(255,255,255,.12);border-radius:999px;overflow:hidden;}
+.bar{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .4s ease;}
+.counter{font-size:.8rem;color:var(--muted);font-weight:600;}
+.card{width:100%;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px 24px;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,.35);display:flex;flex-direction:column;align-items:center;gap:14px;min-height:180px;justify-content:center;}
+.number{font-size:4rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.number.pop{animation:pop .35s ease;}
+@keyframes pop{0%{transform:scale(.6);opacity:0;}60%{transform:scale(1.15);}100%{transform:scale(1);opacity:1;}}
+.reason{font-size:1rem;margin:0;}
+.fireworks{position:fixed;inset:0;pointer-events:none;z-index:50;overflow:hidden;}
+.shell{position:fixed;bottom:-20px;width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 10px 3px rgba(255,255,255,.9);animation:rise 900ms ease-out forwards;}
+@keyframes rise{to{bottom:55%;}}
+.particle{position:fixed;width:6px;height:6px;border-radius:50%;pointer-events:none;animation:explode 900ms ease-out forwards;}
+@keyframes explode{to{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0;}}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease;z-index:100;padding:24px;}
+.modal-overlay.show{opacity:1;pointer-events:auto;}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px 24px;text-align:center;max-width:360px;width:100%;transform:scale(.8);transition:transform .3s ease;box-shadow:0 25px 60px rgba(0,0,0,.5);}
+.modal-overlay.show .modal{transform:scale(1);}
+.modal-emoji{font-size:2.5rem;}
+.modal h2{margin:8px 0;font-size:1.3rem;}
+.modal p{color:var(--muted);font-size:.9rem;margin:0 0 20px;}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important;}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <span class="badge">💻 Laptop options</span>
+  <h1>Two solid laptop deals, right here in Naga City</h1>
+  <p>Pick a tab to see each option, or open the full comparison.</p>
+</header>
+
+<nav class="tabs" aria-label="Laptop options">
+  <div class="tabs-inner" role="tablist">
+    <button class="tab" role="tab" data-tab="nitro"><strong>Option 1: Acer Nitro V 15</strong><small>₱27,999</small></button>
+    <button class="tab" role="tab" data-tab="tuf"><strong>Option 2: ASUS TUF Gaming A15</strong><small>₱32,000</small></button>
+    <button class="tab" role="tab" data-tab="case"><strong>Overall comparison &amp; academic case</strong><small>Side by side + 26 reasons</small></button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ================= OPTION 1: ACER NITRO V 15 ================= -->
+<div class="tab-panel" id="tab-nitro" role="tabpanel">
+<section class="section">
+  <div class="section-inner">
+    <h2>Option 1: Acer Nitro V 15</h2>
+    <p class="lede">A well-kept secondhand unit, tested in person, at a fraction of the retail price.</p>
+    <div class="grid-2">
+      <div class="panel">
+        <span class="tag risk">Brand-new retail</span>
+        <h3>Acer Nitro V 15 (new)</h3>
+        <div class="price old">~₱43,000+</div>
+      </div>
+      <div class="panel">
+        <span class="tag deal">This listing (secondhand)</span>
+        <h3>Acer Nitro V 15</h3>
+        <div class="price new">₱27,999</div>
+      </div>
+    </div>
+    <div class="savings-banner">
+      <div class="amount">You save ~₱15,000</div>
+      <p>The seller is about <span class="proximity">1 km away</span> in Naga City.</p>
+    </div>
+    <div class="chips"><span class="chip">Ryzen 5</span><span class="chip">RTX 2050</span><span class="chip">512GB SSD</span><span class="chip">144Hz screen</span></div>
+    <div class="gallery three">
+      <div>
+        <p class="proof-label">Facebook Marketplace listing</p>
+        <a class="img-slot shot" href="https://i.imgur.com/kOg3xdr.jpeg" target="_blank" rel="noopener"><img src="https://i.imgur.com/kOg3xdr.jpeg" alt="Acer Nitro V 15 Facebook Marketplace listing screenshot" loading="lazy"></a>
+      </div>
+      <div>
+        <p class="proof-label">Retail price reference</p>
+        <a class="img-slot shot" href="https://i.imgur.com/IfUW9Yy.jpeg" target="_blank" rel="noopener"><img src="https://i.imgur.com/IfUW9Yy.jpeg" alt="Acer Nitro V 15 retail price reference" loading="lazy"></a>
+      </div>
+      <div>
+        <p class="proof-label">Acer Nitro V 15 photo</p>
+        <a class="img-slot" href="https://i.imgur.com/oxXgA8r.jpeg" target="_blank" rel="noopener"><img src="https://i.imgur.com/oxXgA8r.jpeg" alt="Acer Nitro V 15" loading="lazy"></a>
+      </div>
+    </div>
+    <button class="link-btn" data-go="tuf">See Option 2: ASUS TUF Gaming A15 →</button>
+  </div>
+</section>
+</div>
+
+<!-- ================= OPTION 2: ASUS TUF GAMING A15 ================= -->
+<div class="tab-panel" id="tab-tuf" role="tabpanel">
+<section class="section">
+  <div class="section-inner">
+    <h2>Option 2: ASUS TUF Gaming A15</h2>
+    <p class="lede">A tougher, higher-tier machine that would normally cost more than double this price.</p>
+    <div class="grid-2">
+      <div class="panel">
+        <span class="tag risk">Brand-new retail value</span>
+        <h3>ASUS TUF Gaming A15 (new)</h3>
+        <div class="price old">~₱70,000</div>
+      </div>
+      <div class="panel">
+        <span class="tag deal">This listing (secondhand)</span>
+        <h3>ASUS TUF Gaming A15</h3>
+        <div class="price new">₱32,000</div>
+      </div>
+    </div>
+    <div class="savings-banner">
+      <div class="amount">You save ~₱38,000</div>
+      <p>That's 54%+ off the retail value.</p>
+    </div>
+    <div class="panel" style="margin-top:20px;">
+      <h3>Why the TUF stands out</h3>
+      <ul class="checklist">
+        <li class="good">Military-grade durable build</li>
+        <li class="good">High performance for school, research, and light gaming</li>
+        <li class="good">Built for long-term durability, so it lasts through college and beyond</li>
+      </ul>
+    </div>
+    <div class="gallery three">
+      <div>
+        <p class="proof-label">Facebook Marketplace listing</p>
+        <a class="img-slot shot" href="https://i.imgur.com/JUOQ1fX.jpeg" target="_blank" rel="noopener"><img src="https://i.imgur.com/JUOQ1fX.jpeg" alt="ASUS TUF Gaming A15 Facebook Marketplace listing screenshot" loading="lazy"></a>
+      </div>
+      <div>
+        <p class="proof-label">Retail reference (~₱70k value)</p>
+        <a class="img-slot shot" href="https://i.imgur.com/jylQLra.png" target="_blank" rel="noopener"><img src="https://i.imgur.com/jylQLra.png" alt="ASUS TUF Gaming A15 retail price reference" loading="lazy"></a>
+      </div>
+      <div>
+        <p class="proof-label">ASUS TUF A15 unit photo</p>
+        <a class="img-slot" href="https://i.imgur.com/qoJxqSO.jpeg" target="_blank" rel="noopener"><img src="https://i.imgur.com/qoJxqSO.jpeg" alt="ASUS TUF Gaming A15 unit photo" loading="lazy"></a>
+      </div>
+    </div>
+    <button class="link-btn" data-go="case">See the full comparison →</button>
+  </div>
+</section>
+</div>
+
+<!-- ================= OVERALL COMPARISON & ACADEMIC CASE ================= -->
+<div class="tab-panel" id="tab-case" role="tabpanel">
+<section class="section">
+  <div class="section-inner">
+    <h2>Overall comparison</h2>
+    <p class="lede">Both are high-value local deals in Naga City, so the choice comes down to budget and priorities.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th></th><th>Option 1: Acer Nitro V 15</th><th>Option 2: ASUS TUF Gaming A15</th></tr></thead>
+        <tbody>
+          <tr><td>Secondhand price</td><td class="win">₱27,999</td><td>₱32,000</td></tr>
+          <tr><td>Brand-new value</td><td>~₱43,000+</td><td>~₱70,000</td></tr>
+          <tr><td>Total savings</td><td>~₱15,000</td><td class="win">~₱38,000 (54%+)</td></tr>
+          <tr><td>Highlights</td><td>Ryzen 5, RTX 2050, 512GB SSD, 144Hz screen</td><td>Military-grade build, high performance, long-term durability</td></tr>
+          <tr><td>How we buy</td><td colspan="2">Local in Naga City, in-person meetup, full inspection before paying</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid-2" style="margin-top:20px;">
+      <div class="panel"><h3>Lower budget: Option 1</h3><p class="lede" style="margin:8px 0 0;">Costs about ₱4,000 less and still covers everything school needs.</p></div>
+      <div class="panel"><h3>Bigger long-term value: Option 2</h3><p class="lede" style="margin:8px 0 0;">Costs about ₱4,000 more for a sturdier build worth ~₱70,000 new.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="section-inner">
+    <h2>26 reasons I need a reliable laptop</h2>
+    <p class="lede">Tap through every one.</p>
+    <div class="app">
+      <div class="progress"><div class="bar" id="bar"></div></div>
+      <div class="counter" id="counter">0 / 26</div>
+      <div class="card">
+        <div class="number" id="number">?</div>
+        <p class="reason" id="reason">Tap below to reveal reason #1</p>
+      </div>
+      <button class="btn" id="btn">Show Reason 1</button>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ================= COMMON CORE (shown under every tab) ================= -->
+<section class="section" id="oldnew">
+  <div class="section-inner">
+    <h2>Old laptop vs. either new one</h2>
+    <p class="lede">Ten years apart, and it shows in every single task.</p>
+    <div class="grid-2">
+      <div class="panel">
+        <span class="tag risk">Current laptop: 10+ years old</span>
+        <a class="img-slot" style="margin:12px 0 4px;" href="https://i.imgur.com/syEMKmj.jpeg" target="_blank" rel="noopener"><img src="https://i.imgur.com/syEMKmj.jpeg" alt="Current old broken Acer laptop" loading="lazy"></a>
+        <ul class="checklist">
+          <li class="bad">Overheats during normal browsing</li>
+          <li class="bad">Battery is dead, so it must stay plugged in</li>
+          <li class="bad">Opens apps and tabs painfully slowly</li>
+          <li class="bad">Laggy, with a failing keyboard and speakers</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <span class="tag deal">Option 1 or Option 2</span>
+        <h3 style="margin-top:12px;">What changes with either one</h3>
+        <ul class="checklist">
+          <li class="good">Modern gaming-class performance for heavy multitasking</li>
+          <li class="good">Smooth, fast, and portable instead of laggy and stuck to an outlet</li>
+          <li class="good">Keys, screen, and battery all tested in person before any payment</li>
+          <li class="good">Reliable enough for school, research, and future career skills</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="safety">
+  <div class="section-inner">
+    <h2>Zero shipping risk, zero scam risk</h2>
+    <p class="lede">Both sellers are local, right here in <span class="proximity">Naga City</span>. No couriers, no blind trust, no online-only deals.</p>
+    <div class="panel">
+      <h3>Our safe purchase plan</h3>
+      <ol class="steps">
+        <li>Meet face-to-face in a public, secure spot: SM City Naga or Robinsons Place Naga.</li>
+        <li>Fully inspect the hardware on the spot: every key, the screen, and the battery.</li>
+        <li>Hand over payment only once everything checks out.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="map">
+  <div class="section-inner">
+    <h2>Right here in Naga City</h2>
+    <p class="lede">Close enough that the whole handoff happens in one afternoon.</p>
+    <div class="map-wrap">
+      <iframe src="https://www.google.com/maps?q=Naga+City,+Camarines+Sur,+Philippines&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map of Naga City, Bicol, Philippines"></iframe>
+    </div>
+    <p class="map-caption">Exact meetup point to be confirmed: likely SM City Naga or Robinsons Place Naga.</p>
+  </div>
+</section>
+
+<section class="section alt" id="pledge">
+  <div class="section-inner">
+    <div class="pledge">
+      <div class="mark">🤝</div>
+      <h2>A promise, not just a purchase</h2>
+      <p>Whichever laptop becomes mine, I'll take care of it like the investment it is: kept clean, protected, and in good condition. I'll use it to keep my grades up, get schoolwork and research done well ahead of deadlines, and build real skills for the career I'm working toward through college. This isn't just about wanting a laptop. It's about finally having the right tool for the work I'm already trying hard to do.</p>
+      <span class="sign">— signed, with gratitude 🙏</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="fireworks" id="fireworks"></div>
+
+<div class="modal-overlay" id="overlay">
+  <div class="modal">
+    <div class="modal-emoji">😭😭</div>
+    <h2>please buy me a laptop😭😭</h2>
+    <p>26 real reasons. Zero exaggeration (okay, maybe a little).</p>
+    <button class="btn" id="closeBtn">okay I'm convinced 🥺</button>
+  </div>
+</div>
+
+<script>
+/* ---------- Tabs ---------- */
+const tabs = [...document.querySelectorAll('[data-tab]')];
+const panels = [...document.querySelectorAll('.tab-panel')];
+const ids = tabs.map(t => t.dataset.tab);
+function show(id, scroll){
+  tabs.forEach(t => { const on = t.dataset.tab === id; t.classList.toggle('active', on); t.setAttribute('aria-selected', on); });
+  panels.forEach(p => p.classList.toggle('active', p.id === 'tab-' + id));
+  if (location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
+  if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.tab, true)));
+document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => show(b.dataset.go, true)));
+window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (ids.includes(h)) show(h, false); });
+const start = location.hash.slice(1);
+show(ids.includes(start) ? start : 'nitro', false);
+
+/* ---------- 26 reasons + fireworks ---------- */
+const reasons = [
+"I will use it for school until I graduate college.",
+"This will greatly boost my academics.",
+"This will make me happy and actually take school very seriously.",
+"I will be forever grateful.",
+"My Acer laptop is broken again.",
+"My Acer laptop is barely usable — constantly overheating, lagging, very slow, weak, broken speakers, and more.",
+"My current Acer laptop is incredibly outdated and old (10+ years old).",
+"My Acer laptop has a broken battery and is not portable.",
+"This laptop is future-proofed, meaning it can last a few years.",
+"School projects today demand heavy multitasking which my current broken, obsolete laptop cannot handle.",
+"This laptop has an actually working battery, which will prevent me from accidentally losing data.",
+"It's actually portable — I can charge it and bring it anywhere.",
+"Lightweight, good build quality, and great performance.",
+"Perfectly balances schoolwork demands and personal entertainment such as light gaming.",
+"Having a reliable computer drastically reduces daily stress and anxiety about schoolwork failing at the last minute.",
+"It will let me comfortably learn programming, video editing, graphics, and advanced software for future career paths.",
+"The clear, modern screen and high refresh rate reduce eye strain during long hours of studying and typing.",
+"It comes with a built-in webcam and clear microphone setup for online classes, group projects, and meetings.",
+"Buying a well-maintained secondhand unit locally saves thousands of pesos compared to retail price.",
+"It teaches me responsibility in taking care of a valuable tool and electronic investment.",
+"I can use it independently for campus journalism, research drafts, and presentations without borrowing anyone's device.",
+"It eliminates the daily frustration of waiting minutes just for a single app or webpage to load.",
+"A modern, tactile keyboard makes typing long essays and requirements much faster and more comfortable.",
+"Having a proper setup keeps me focused and productive at home instead of struggling with tech issues.",
+"It ensures I have the right tools to succeed and keep up with school and beyond.",
+"My 1st sister has a MacBook, a laptop, and an iPhone. My 2nd sister has an iPhone, iPad, cellphone, and laptop. My brother has a cellphone, laptop, and an iPad. Meanwhile, I only have a cellphone and a single broken laptop."
+];
+
+let idx = 0;
+const numberEl = document.getElementById('number');
+const reasonEl = document.getElementById('reason');
+const counterEl = document.getElementById('counter');
+const barEl = document.getElementById('bar');
+const btn = document.getElementById('btn');
+const fireworksEl = document.getElementById('fireworks');
+const overlay = document.getElementById('overlay');
+
+btn.addEventListener('click', () => {
+  if (idx >= 26) return;
+  idx++;
+  numberEl.textContent = idx;
+  numberEl.classList.remove('pop');
+  void numberEl.offsetWidth;
+  numberEl.classList.add('pop');
+  reasonEl.textContent = reasons[idx-1];
+  counterEl.textContent = idx + ' / 26';
+  barEl.style.width = (idx/26*100) + '%';
+  if (idx < 26) {
+    btn.textContent = 'Next Reason →';
+  } else {
+    btn.textContent = 'Reveal the truth 🎆';
+    btn.disabled = true;
+    setTimeout(launchFireworks, 500);
+  }
+});
+
+function launchFireworks(){
+  let bursts = 0;
+  function burst(){
+    const shell = document.createElement('div');
+    shell.className = 'shell';
+    shell.style.left = (35 + Math.random()*30) + '%';
+    fireworksEl.appendChild(shell);
+    shell.addEventListener('animationend', () => {
+      const rect = shell.getBoundingClientRect();
+      shell.remove();
+      explode(rect.left, rect.top);
+    });
+    bursts++;
+    if (bursts < 3) setTimeout(burst, 450);
+    else setTimeout(() => overlay.classList.add('show'), 1100);
+  }
+  burst();
+}
+
+function explode(x, y){
+  const colors = ['#8b5cf6','#facc15','#4ade80','#f472b6','#60a5fa'];
+  for (let i = 0; i < 24; i++){
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const angle = (Math.PI * 2 * i) / 24;
+    const dist = 70 + Math.random() * 60;
+    p.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+    p.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+    p.style.left = x + 'px';
+    p.style.top = y + 'px';
+    p.style.background = colors[i % colors.length];
+    fireworksEl.appendChild(p);
+    p.addEventListener('animationend', () => p.remove());
+  }
+}
+
+document.getElementById('closeBtn').addEventListener('click', () => overlay.classList.remove('show'));
+</script>
+</body>
+</html>
